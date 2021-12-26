@@ -14,17 +14,20 @@ using Telegram.Bot.Types.Enums;
 
 namespace NeuralNetwork1
 {
-    class TLGBotik
+    public class TLGBotik
     {
         public Telegram.Bot.TelegramBotClient botik = null;
 
         private UpdateTLGMessages formUpdater;
 
+        private readonly AIMLService aiml;
+
         private BaseNetwork perseptron = null;
         // CancellationToken - инструмент для отмены задач, запущенных в отдельном потоке
         private readonly CancellationTokenSource cts = new CancellationTokenSource();
-        public TLGBotik(BaseNetwork net,  UpdateTLGMessages updater)
-        { 
+        public TLGBotik(BaseNetwork net,  UpdateTLGMessages updater, AIMLService aimlService)
+        {
+            aiml = aimlService;
             var botKey = System.IO.File.ReadAllText("botkey.txt");
             botik = new Telegram.Bot.TelegramBotClient(botKey);
             formUpdater = updater;
@@ -42,6 +45,8 @@ namespace NeuralNetwork1
             //  Тут очень простое дело - банально отправляем назад сообщения
             var message = update.Message;
             formUpdater("Тип сообщения : " + message.Type.ToString());
+            //var chatId = message.Chat.Id;
+            //var username = message.Chat.FirstName;
 
             //  Получение файла (картинки)
             if (message.Type == Telegram.Bot.Types.Enums.MessageType.Photo)
@@ -80,8 +85,29 @@ namespace NeuralNetwork1
                 string authors = "Гаянэ Аршакян, Луспарон Тызыхян, Дамир Казеев, Роман Хыдыров, Владимир Садовский, Анастасия Аскерова, Константин Бервинов, и Борис Трикоз (но он уже спать ушел) и молчаливый Даниил Ярошенко, а год спустя ещё Иванченко Вячеслав";
                 botik.SendTextMessageAsync(message.Chat.Id, "Авторы проекта : " + authors);
             }
+
+
             botik.SendTextMessageAsync(message.Chat.Id, "Bot reply : " + message.Text);
             formUpdater(message.Text);
+            //formUpdater("rrrrrrrrr");
+
+
+            //if (message.Type == MessageType.Text)
+            //{
+            //    var messageText = update.Message.Text;
+
+            //    //Console.WriteLine($"Received a '{messageText}' message in chat {chatId} with {username}.");
+
+            //    // Echo received message text
+            //    await botClient.SendTextMessageAsync(
+            //        chatId: chatId,
+            //        text: aiml.Talk(chatId, username, messageText),
+            //        cancellationToken: cancellationToken);
+            //    formUpdater("qqqqqqqqqqqqq");
+            //    return;
+            //}
+
+
             return;
         }
         Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)

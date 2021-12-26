@@ -30,7 +30,7 @@ namespace NeuralNetwork1
         /// <summary>
         /// Чат-бот AIML
         /// </summary>
-        AIMLBotik botik = new AIMLBotik();
+        //AIMLBotik botik = new AIMLBotik();
 
         TLGBotik tlgBot;
 
@@ -47,7 +47,7 @@ namespace NeuralNetwork1
         /// <summary>
         /// Абстрактный базовый класс, псевдоним либо для CustomNet, либо для AccordNet
         /// </summary>
-        BaseNetwork net = null;
+        //BaseNetwork net = null;
 
         //public Form1()
         //{
@@ -81,13 +81,11 @@ namespace NeuralNetwork1
             InitializeComponent();
             this.networksFabric = networksFabric;
             netTypeBox.Items.AddRange(this.networksFabric.Keys.Select(s => (object)s).ToArray());
-
-            
             netTypeBox.SelectedIndex = 0;
-            netTypeBox.SelectedIndex = 0;
-            //recreateNetButton_Click(this, null);
+            tlgBot = new TLGBotik(Net, new UpdateTLGMessages(UpdateTLGInfo), new AIMLService());
 
             button3_Click(this, null);
+
         }
 
 
@@ -368,7 +366,7 @@ namespace NeuralNetwork1
 
         private void netTypeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            net = AccordNet;
+            //net = AccordNet;
         }
 
         private void recreateNetButton_MouseEnter(object sender, EventArgs e)
@@ -378,9 +376,9 @@ namespace NeuralNetwork1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var phrase = AIMLInput.Text;
-            if (phrase.Length > 0)
-                AIMLOutput.Text += botik.Talk(phrase) + Environment.NewLine;
+            //var phrase = AIMLInput.Text;
+            //if (phrase.Length > 0)
+            //    AIMLOutput.Text += botik.Talk(phrase) + Environment.NewLine;
         }
 
         private void TLGBotOnButton_Click(object sender, EventArgs e)
