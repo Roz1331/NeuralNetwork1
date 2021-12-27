@@ -220,7 +220,7 @@
             this.netStructureBox.Name = "netStructureBox";
             this.netStructureBox.Size = new System.Drawing.Size(159, 22);
             this.netStructureBox.TabIndex = 18;
-            this.netStructureBox.Text = "1024;500;20;10";
+            this.netStructureBox.Text = "1024;600;200;100;10";
             // 
             // recreateNetButton
             // 

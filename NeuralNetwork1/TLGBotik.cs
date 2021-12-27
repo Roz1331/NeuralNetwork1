@@ -60,8 +60,6 @@ namespace NeuralNetwork1
                 var imageStream = new MemoryStream();
                 await botik.DownloadFileAsync(fl.FilePath, imageStream, cancellationToken: cancellationToken);
 
-
-
                 var img = System.Drawing.Image.FromStream(imageStream);
                 Console.WriteLine("картинка получена");
                 System.Drawing.Bitmap bm = new System.Drawing.Bitmap(img);
@@ -69,21 +67,29 @@ namespace NeuralNetwork1
                 Console.WriteLine("положили все в битмапу");
 
                 ProcessImage(bm);
+                ResizeBicubic resize = new ResizeBicubic(32, 32);
+                AForge.Imaging.UnmanagedImage pr = resize.Apply(processed);
+                Sample currentImage = new Sample(imgToData(pr), 10);
+
+
+
+
                 Console.WriteLine("обработали изображение");
                 //  Масштабируем aforge
                 //AForge.Imaging.Filters.ResizeBilinear scaleFilter = new AForge.Imaging.Filters.ResizeBilinear(32, 32);
-                //var uProcessed = scaleFilter.Apply(AForge.Imaging.UnmanagedImage.FromManagedImage(bm));
+                ////AForge.Imaging.UnmanagedImage uProcessed = scaleFilter.Apply(AForge.Imaging.UnmanagedImage.FromManagedImage(bm));
+                //AForge.Imaging.UnmanagedImage uProcessed = scaleFilter.Apply(AForge.Imaging.UnmanagedImage.FromManagedImage(final));
 
-                //var uProcessed = scaleFilter.Apply(AForge.Imaging.UnmanagedImage.FromManagedImage(final));
-                ResizeBicubic resize = new ResizeBicubic(32, 32);
-                //AForge.Imaging.UnmanagedImage res = resize.Apply(processed);
+                ////var uProcessed = scaleFilter.Apply(AForge.Imaging.UnmanagedImage.FromManagedImage(final));
+                ////ResizeBicubic resize = new ResizeBicubic(32, 32);
+                ////AForge.Imaging.UnmanagedImage res = resize.Apply(processed);
 
-                AForge.Imaging.UnmanagedImage rrr = AForge.Imaging.UnmanagedImage.FromManagedImage(final);
-                AForge.Imaging.UnmanagedImage res = resize.Apply(rrr);
+                //AForge.Imaging.UnmanagedImage rrr = AForge.Imaging.UnmanagedImage.FromManagedImage(final);
+                //AForge.Imaging.UnmanagedImage res = resize.Apply(rrr);
 
                 Console.WriteLine("отмасштабировали изображение");
 
-                Sample currentImage = new Sample(imgToData(res), 10);
+                //Sample currentImage = new Sample(imgToData(uProcessed), 10);
                 FigureType recognizedClass = perseptron.Predict(currentImage);
 
                 //Sample sample = GenerateImage.GenerateFigure(uProcessed);
@@ -132,6 +138,20 @@ namespace NeuralNetwork1
             //botik.SendTextMessageAsync(message.Chat.Id, "Bot reply : " + message.Text);
             formUpdater("User: "+message.Text);
 
+            if (message.Text == "Что ты умеешь" || message.Text == "что ты умеешь")
+            {
+                Bitmap bmCan = new Bitmap(@"C:\work\xxx\IS\NeuralNetrworkTLGBot_2021\NeuralNetrworkTLGBot\can\canBot.jpg");
+
+                MemoryStream ms = new MemoryStream();
+                bmCan.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Seek(0, 0);
+                await botik.SendPhotoAsync(
+                    message.Chat.Id,
+                    ms,
+                    //"Я умею распознавать эти символы",
+                    cancellationToken: cancellationToken
+                );
+            }
 
             if (message.Type == MessageType.Text)
             {
@@ -149,6 +169,8 @@ namespace NeuralNetwork1
                 formUpdater("Bot: " + str);
                 return;
             }
+
+            
 
 
             return;

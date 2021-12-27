@@ -490,6 +490,22 @@
     </category>
  </topic>
 	
+	<category>
+    <pattern>ЧТО ТЫ УМЕЕШЬ</pattern>
+    <template>
+      <random>
+        <li>
+          Я умею распознавать эти символы
+        </li>
+        <li>
+          Я умею распознавать сиволы медиаплеера
+        </li>
+        <li>
+          Вот это могу распознать
+        </li>
+      </random>
+    </template>
+  </category>
 
   <category>
     <pattern>*</pattern>
@@ -501,5 +517,4 @@
       </random>
     </template>
   </category>
-  
 </aiml>

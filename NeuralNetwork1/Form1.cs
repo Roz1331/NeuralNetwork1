@@ -216,6 +216,9 @@ namespace NeuralNetwork1
                 double f = await Task.Run(() => curNet.TrainOnDataSet(samples, epoches, acceptable_error, parallel));
                 groupBox1.Enabled = true;
                 pictureBox1.Enabled = true;
+
+                tlgBot = new TLGBotik(curNet, new UpdateTLGMessages(UpdateTLGInfo), new AIMLService());
+
                 return f;
             }
             catch (Exception e)
