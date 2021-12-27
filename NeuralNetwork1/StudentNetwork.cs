@@ -13,7 +13,7 @@ namespace NeuralNetwork1
         // Значение ошибки
         double[][] errors;
         // Скорость обучения
-        double learningConst = 0.01;
+        double learningConst = 0.0025;
 
         Stopwatch stopWatch = new Stopwatch();
         Random rand = new Random();

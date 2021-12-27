@@ -43,8 +43,6 @@ namespace NeuralNetwork1
 
         private async Task HandleUpdateMessageAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-
-
             //  Тут очень простое дело - банально отправляем назад сообщения
             var message = update.Message;
             formUpdater("Тип сообщения : " + message.Type.ToString());
@@ -71,71 +69,44 @@ namespace NeuralNetwork1
                 AForge.Imaging.UnmanagedImage pr = resize.Apply(processed);
                 Sample currentImage = new Sample(imgToData(pr), 10);
 
-
-
-
                 Console.WriteLine("обработали изображение");
-                //  Масштабируем aforge
-                //AForge.Imaging.Filters.ResizeBilinear scaleFilter = new AForge.Imaging.Filters.ResizeBilinear(32, 32);
-                ////AForge.Imaging.UnmanagedImage uProcessed = scaleFilter.Apply(AForge.Imaging.UnmanagedImage.FromManagedImage(bm));
-                //AForge.Imaging.UnmanagedImage uProcessed = scaleFilter.Apply(AForge.Imaging.UnmanagedImage.FromManagedImage(final));
-
-                ////var uProcessed = scaleFilter.Apply(AForge.Imaging.UnmanagedImage.FromManagedImage(final));
-                ////ResizeBicubic resize = new ResizeBicubic(32, 32);
-                ////AForge.Imaging.UnmanagedImage res = resize.Apply(processed);
-
-                //AForge.Imaging.UnmanagedImage rrr = AForge.Imaging.UnmanagedImage.FromManagedImage(final);
-                //AForge.Imaging.UnmanagedImage res = resize.Apply(rrr);
 
                 Console.WriteLine("отмасштабировали изображение");
 
-                //Sample currentImage = new Sample(imgToData(uProcessed), 10);
                 FigureType recognizedClass = perseptron.Predict(currentImage);
 
-                //Sample sample = GenerateImage.GenerateFigure(uProcessed);
-
                 Console.WriteLine("сейчас будем угадывать");
-                
+
+                string talkabout = "";
+
                 switch (recognizedClass)
                 {
-                    case FigureType.Play: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка play!");break;
-                    case FigureType.Pause: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка Pause!");break;
-                    case FigureType.Repeat: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка Repeat!");break;
-                    case FigureType.Next: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка Next!");break;
-                    case FigureType.Previouse: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка Previouse!");break;
-                    case FigureType.Louder: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка Louder!");break;
-                    case FigureType.Quieter: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка Quieter!");break;
-                    case FigureType.Rewindf: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка Rewindf!");break;
-                    case FigureType.Rewindb: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка Rewindb!");break;
-                    case FigureType.Mix: botik.SendTextMessageAsync(message.Chat.Id, "Это легко, это кнопка Mix!");break;
+                    case FigureType.Play: talkabout = "play"; break;
+                    case FigureType.Pause: talkabout = "pause"; break;
+                    case FigureType.Repeat: talkabout = "repeat"; break;
+                    case FigureType.Next: talkabout = "next"; break;
+                    case FigureType.Previouse: talkabout = "previouse"; break;
+                    case FigureType.Louder: talkabout = "louder"; break;
+                    case FigureType.Quieter: talkabout = "quieter"; break;
+                    case FigureType.Rewindf: talkabout = "rewindf"; break;
+                    case FigureType.Rewindb: talkabout = "rewindb"; break;
+                    case FigureType.Mix: talkabout = "mix"; break;
                     default: botik.SendTextMessageAsync(message.Chat.Id, "Я такого не знаю!"); break;
                 }
 
-                //imageStream.Seek(0, 0);
-                MemoryStream ms = new MemoryStream();
-                final.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                ms.Seek(0, 0);
-                await botik.SendPhotoAsync(
-                    message.Chat.Id,
-                    ms,
-                    "держи",
-                    cancellationToken: cancellationToken
-                );
-
+                string messageText = "Говорим о " + talkabout;
+                string str = aiml.Talk(chatId, username, messageText);
+                await botClient.SendTextMessageAsync(
+                    chatId: chatId,
+                    text: str,
+                    cancellationToken: cancellationToken);
 
                 formUpdater("Picture recognized!");
                 return;
             }
 
             if (message == null || message.Type != MessageType.Text) return;
-            //if(message.Text == "Authors")
-            //{
-            //    string authors = "Гаянэ Аршакян, Луспарон Тызыхян, Дамир Казеев, Роман Хыдыров, Владимир Садовский, Анастасия Аскерова, Константин Бервинов, и Борис Трикоз (но он уже спать ушел) и молчаливый Даниил Ярошенко, а год спустя ещё Иванченко Вячеслав";
-            //    botik.SendTextMessageAsync(message.Chat.Id, "Авторы проекта : " + authors);
-            //}
 
-
-            //botik.SendTextMessageAsync(message.Chat.Id, "Bot reply : " + message.Text);
             formUpdater("User: "+message.Text);
 
             if (message.Text == "Что ты умеешь" || message.Text == "что ты умеешь")
@@ -157,8 +128,6 @@ namespace NeuralNetwork1
             {
                 var messageText = update.Message.Text;
 
-                //Console.WriteLine($"Received a '{messageText}' message in chat {chatId} with {username}.");
-
                 string str = aiml.Talk(chatId, username, messageText);
 
                 // Echo received message text
@@ -169,9 +138,6 @@ namespace NeuralNetwork1
                 formUpdater("Bot: " + str);
                 return;
             }
-
-            
-
 
             return;
         }
@@ -225,7 +191,6 @@ namespace NeuralNetwork1
         // обработанное изображение 
         public AForge.Imaging.UnmanagedImage processed;
 
-
         public void ProcessImage(Bitmap input_image)
         {
             Blober.FilterBlobs = true;
@@ -233,14 +198,13 @@ namespace NeuralNetwork1
             Blober.MinHeight = 5;
             Blober.ObjectsOrder = AForge.Imaging.ObjectsOrder.Size;
             threshldFilter = new AForge.Imaging.Filters.BradleyLocalThresholding();
-            //The filter inverts colored and grayscale images.инверсия
+
             InvertFilter = new AForge.Imaging.Filters.Invert();
-            // filters objects
+
             grayFilter = new AForge.Imaging.Filters.Grayscale(0.2125, 0.7154, 0.0721);
 
             int side = Math.Min(input_image.Height, input_image.Width);
-            Rectangle cropRect = new Rectangle(0, 0, side, side);// this is square that represents feed from camera
-                                                                    //g.DrawImage(input_image, new Rectangle(0, 0, input_image.Width, input_image.Height), cropRect, GraphicsUnit.Pixel); // place it on original bitmap         
+            Rectangle cropRect = new Rectangle(0, 0, side, side);
             original = new Bitmap(input_image);                                                                                                                // set new processed
             if (processed != null)
                 processed.Dispose();  //Конвертируем изображение в градации серого
@@ -273,12 +237,6 @@ namespace NeuralNetwork1
             if (final != null)
                 final.Dispose();
             final = processed.ToManagedImage();
-        }
-
-        public AForge.Imaging.UnmanagedImage GetImage()
-        {
-            ResizeBicubic resize = new ResizeBicubic(32, 32);
-            return resize.Apply(processed);
         }
 
         private double[] imgToData(AForge.Imaging.UnmanagedImage img)

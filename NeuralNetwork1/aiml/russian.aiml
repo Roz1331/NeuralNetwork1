@@ -506,7 +506,12 @@
       </random>
     </template>
   </category>
-
+  <category>
+    <pattern>ГОВОРИМ О * </pattern>
+    <template>
+    Это <set name="topic"><star/></set>
+    </template>
+  </category>
   <category>
     <pattern>*</pattern>
     <template>

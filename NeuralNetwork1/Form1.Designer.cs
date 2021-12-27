@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Label label2;
-            System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
             System.Windows.Forms.Label label6;
             System.Windows.Forms.Label label7;
@@ -41,13 +40,9 @@
             this.parallelCheckBox = new System.Windows.Forms.CheckBox();
             this.netStructureBox = new System.Windows.Forms.TextBox();
             this.recreateNetButton = new System.Windows.Forms.Button();
-            this.classCounter = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
-            this.testNetButton = new System.Windows.Forms.Button();
             this.netTrainButton = new System.Windows.Forms.Button();
             this.AccuracyCounter = new System.Windows.Forms.TrackBar();
             this.EpochesCounter = new System.Windows.Forms.NumericUpDown();
-            this.TrainingSizeCounter = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.trainOneButton = new System.Windows.Forms.Button();
@@ -65,16 +60,13 @@
             this.TLGBotOnButton = new System.Windows.Forms.Button();
             this.TLGUsersMessages = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
-            label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.classCounter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccuracyCounter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EpochesCounter)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrainingSizeCounter)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -89,16 +81,6 @@
             label2.Size = new System.Drawing.Size(110, 17);
             label2.TabIndex = 2;
             label2.Text = "Структура сети";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(11, 90);
-            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(197, 17);
-            label4.TabIndex = 5;
-            label4.Text = "Размер обучающей выборки";
             // 
             // label5
             // 
@@ -140,7 +122,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // label1
             // 
@@ -159,16 +140,11 @@
             this.groupBox1.Controls.Add(this.parallelCheckBox);
             this.groupBox1.Controls.Add(this.netStructureBox);
             this.groupBox1.Controls.Add(this.recreateNetButton);
-            this.groupBox1.Controls.Add(this.classCounter);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.testNetButton);
             this.groupBox1.Controls.Add(this.netTrainButton);
             this.groupBox1.Controls.Add(this.AccuracyCounter);
             this.groupBox1.Controls.Add(label6);
             this.groupBox1.Controls.Add(this.EpochesCounter);
             this.groupBox1.Controls.Add(label5);
-            this.groupBox1.Controls.Add(this.TrainingSizeCounter);
-            this.groupBox1.Controls.Add(label4);
             this.groupBox1.Controls.Add(label2);
             this.groupBox1.Location = new System.Drawing.Point(685, 49);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
@@ -220,7 +196,7 @@
             this.netStructureBox.Name = "netStructureBox";
             this.netStructureBox.Size = new System.Drawing.Size(159, 22);
             this.netStructureBox.TabIndex = 18;
-            this.netStructureBox.Text = "1024;600;200;100;10";
+            this.netStructureBox.Text = "1024;2000;150;10";
             // 
             // recreateNetButton
             // 
@@ -233,52 +209,6 @@
             this.recreateNetButton.UseVisualStyleBackColor = true;
             this.recreateNetButton.Click += new System.EventHandler(this.button3_Click);
             this.recreateNetButton.MouseEnter += new System.EventHandler(this.recreateNetButton_MouseEnter);
-            // 
-            // classCounter
-            // 
-            this.classCounter.Location = new System.Drawing.Point(223, 154);
-            this.classCounter.Margin = new System.Windows.Forms.Padding(4);
-            this.classCounter.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.classCounter.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.classCounter.Name = "classCounter";
-            this.classCounter.Size = new System.Drawing.Size(160, 22);
-            this.classCounter.TabIndex = 16;
-            this.classCounter.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.classCounter.ValueChanged += new System.EventHandler(this.classCounter_ValueChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(67, 154);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(142, 17);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "Количество классов";
-            // 
-            // testNetButton
-            // 
-            this.testNetButton.Location = new System.Drawing.Point(217, 321);
-            this.testNetButton.Margin = new System.Windows.Forms.Padding(4);
-            this.testNetButton.Name = "testNetButton";
-            this.testNetButton.Size = new System.Drawing.Size(133, 37);
-            this.testNetButton.TabIndex = 14;
-            this.testNetButton.Text = "Тест";
-            this.testNetButton.UseVisualStyleBackColor = true;
-            this.testNetButton.Click += new System.EventHandler(this.button2_Click);
-            this.testNetButton.MouseEnter += new System.EventHandler(this.testNetButton_MouseEnter);
             // 
             // netTrainButton
             // 
@@ -326,29 +256,6 @@
             0,
             0});
             // 
-            // TrainingSizeCounter
-            // 
-            this.TrainingSizeCounter.Location = new System.Drawing.Point(223, 87);
-            this.TrainingSizeCounter.Margin = new System.Windows.Forms.Padding(4);
-            this.TrainingSizeCounter.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.TrainingSizeCounter.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TrainingSizeCounter.Name = "TrainingSizeCounter";
-            this.TrainingSizeCounter.Size = new System.Drawing.Size(160, 22);
-            this.TrainingSizeCounter.TabIndex = 6;
-            this.TrainingSizeCounter.Value = new decimal(new int[] {
-            700,
-            0,
-            0,
-            0});
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -378,7 +285,6 @@
             this.trainOneButton.TabIndex = 8;
             this.trainOneButton.Text = "Обучить образцу";
             this.trainOneButton.UseVisualStyleBackColor = true;
-            this.trainOneButton.Click += new System.EventHandler(this.btnTrainOne_Click);
             // 
             // progressBar1
             // 
@@ -459,7 +365,6 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Обработать";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // AIMLOutput
             // 
@@ -538,10 +443,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.classCounter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccuracyCounter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EpochesCounter)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrainingSizeCounter)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -558,21 +461,17 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown TrainingSizeCounter;
         private System.Windows.Forms.NumericUpDown EpochesCounter;
         private System.Windows.Forms.TrackBar AccuracyCounter;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button recreateNetButton;
-        private System.Windows.Forms.NumericUpDown classCounter;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button trainOneButton;
         private System.Windows.Forms.TextBox netStructureBox;
 		private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel infoStatusLabel;
         private System.Windows.Forms.Label elapsedTimeLabel;
-        private System.Windows.Forms.Button testNetButton;
         private System.Windows.Forms.Button netTrainButton;
         private System.Windows.Forms.CheckBox parallelCheckBox;
         private System.Windows.Forms.ToolStripMenuItem вапрвапрToolStripMenuItem;
