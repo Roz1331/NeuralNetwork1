@@ -109,7 +109,7 @@ namespace NeuralNetwork1
 
             formUpdater("User: "+message.Text);
 
-            if (message.Text == "Что ты умеешь" || message.Text == "что ты умеешь")
+            if (message.Text.ToLower() == "что ты умеешь" || message.Text.ToLower() == "что ты умеешь?")
             {
                 Bitmap bmCan = new Bitmap(@"C:\work\xxx\IS\NeuralNetrworkTLGBot_2021\NeuralNetrworkTLGBot\can\canBot.jpg");
 
